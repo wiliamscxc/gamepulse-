@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>GamePulse - Juegos al Mejor Precio</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+    }
+
+    header {
+      background-color: #1f1f1f;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    header h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 18px;
+      color: #ccc;
+    }
+
+    section {
+      padding: 30px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .info-bar {
+      background-color: #0a84ff;
+      color: white;
+      padding: 20px;
+      margin-bottom: 40px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .info-item {
+      text-align: center;
+      max-width: 300px;
+    }
+
+    .info-item i {
+      font-size: 32px;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .juegos-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .juego {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      margin: 10px;
+      padding: 10px;
+      width: 250px;
+      cursor: pointer;
+      background: #fff;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .juego img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+
+    .juego-info {
+      text-align: center;
+    }
+
+    .precio {
+      color: green;
+      font-weight: bold;
+    }
+
+    .detalle {
+      display: none;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    .pagos {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .pagos img {
+      width: 200px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #1f1f1f;
+      color: #ccc;
+      margin-top: 50px;
+    }
+
+    #carrito {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #fff;
+      border: 2px solid #0a84ff;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+      max-width: 300px;
+      z-index: 999;
+    }
+
+    #carrito h3 {
+      margin-top: 0;
+      color: #0a84ff;
+    }
+
+    .btn-agregar {
+      background: #0a84ff;
+      color: white;
+      padding: 5px 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .btn-enviar {
+      margin-top: 15px;
+      background-color: green;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-enviar img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    .whatsapp-float img {
+      width: 60px;
+      height: 60px;
+    }
+  </style>
+</head>
+<body>
+
+<a class="whatsapp-float" href="https://wa.me/51958556903" target="_blank">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+</a>
+
+<header>
+  <h1>🎮 ¡Bienvenido a GamePulse!</h1>
+  <p>Donde tu pasión por los videojuegos late más fuerte</p>
+</header>
+
+<section>
+  <div class="info-bar">
+    <div class="info-item">
+      <i>🕹️</i>
+      <p>Pasión por los videojuegos a precios increíbles</p>
+    </div>
+    <div class="info-item">
+      <i>🎯</i>
+      <p>Tienda dedicada a gamers con atención personalizada</p>
+    </div>
+    <div class="info-item">
+      <i>⚡</i>
+      <p>Confianza, rapidez y variedad siempre actualizada</p>
+    </div>
+  </div>
+
+  <h2>🎮 Catálogo de Juegos</h2>
+  <div class="juegos-container" id="juegos-lista"></div>
+</section>
+
+<section>
+  <h2>💳 Métodos de Pago</h2>
+  <div class="pagos">
+    <div>
+      <img src="img/qryape.png" alt="Yape QR">
+      <p style="text-align:center;">Yape</p>
+    </div>
+    <div>
+      <img src="img/qrpaypal.png" alt="PayPal QR">
+      <p style="text-align:center;">PayPal</p>
+    </div>
+  </div>
+</section>
+
+<div id="carrito">
+  <h3>🛒 Carrito</h3>
+  <ul id="lista-carrito"></ul>
+  <p><strong>Total:</strong> S/<span id="total">0</span></p>
+  <button class="btn-enviar" onclick="enviarPedido()">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    Enviar Pedido
+  </button>
+</div>
+
+<footer>
+  &copy; 2025 GamePulse. Todos los derechos reservados.<br>
+  Contacto: <a href="mailto:aliagawilliam33@gmail.com" style="color: #0a84ff;">aliagawilliam33@gmail.com</a>
+</footer>
+
+<script>
+  const juegos = [
+    { nombre: "GTA V", precio: 30, resumen: "Vive una historia criminal con tres personajes en Los Santos.", requisitos: "Windows 7, 4 GB RAM, 72 GB disco.", img: "img/grandtheftautov.jpg" },
+    { nombre: "Far Cry 5", precio: 25, resumen: "Libera Hope County de una secta. Mundo abierto con acción.", requisitos: "Windows 7+, 8 GB RAM, 40 GB disco.", img: "img/farcry5.jpg" },
+    { nombre: "Watch Dogs: Legion", precio: 20, resumen: "Forma una resistencia en Londres y controla a cualquier ciudadano.", requisitos: "Windows 10, 8 GB RAM, 45 GB disco.", img: "img/watchdogslegion.jpg" },
+    { nombre: "Wildlands", precio: 25, resumen: "Únete a un escuadrón en Bolivia y acaba con el cartel.", requisitos: "Windows 7+, 6 GB RAM, 50 GB disco.", img: "img/ghostreconwildlands.jpg" },
+    { nombre: "Breakpoint", precio: 20, resumen: "Sobrevive en una isla llena de enemigos. Cooperativo y realista.", requisitos: "Windows 10, 8 GB RAM, 67 GB disco.", img: "img/ghostreconbreakpoint.jpg" },
+    { nombre: "Left 4 Dead 2", precio: 10, resumen: "Enfrenta hordas de zombis junto a tu equipo en campañas cooperativas.", requisitos: "Windows 7, 2 GB RAM, 13 GB disco.", img: "img/left4dead2.jpg" },
+    { nombre: "Half-Life 1", precio: 5, resumen: "El clásico que marcó historia. Acción, ciencia y escape.", requisitos: "Windows XP, 96 MB RAM, 500 MB disco.", img: "img/halflife1.jpg" },
+    { nombre: "Half-Life 2", precio: 10, resumen: "Física avanzada y narrativa épica en una ciudad alienada.", requisitos: "Windows 7, 512 MB RAM, 6.5 GB disco.", img: "img/halflife2.jpg" }
+  ];
+
+  let carrito = [];
+  let total = 0;
+
+  const contenedor = document.getElementById("juegos-lista");
+  juegos.forEach(j => {
+    const div = document.createElement("div");
+    div.className = "juego";
+    div.innerHTML = `
+      <img src="${j.img}" alt="${j.nombre}">
+      <div class="juego-info">
+        <h3>${j.nombre}</h3>
+        <p class="precio">S/${j.precio}</p>
+        <button class="btn-agregar" onclick="agregarAlCarrito(event, '${j.nombre}', ${j.precio})">Agregar al carrito</button>
+      </div>
+      <div class="detalle">
+        <p><strong>Resumen:</strong> ${j.resumen}</p>
+        <p><strong>Requisitos:</strong> ${j.requisitos}</p>
+      </div>
+    `;
+    div.onclick = () => toggleDetalle(div);
+    contenedor.appendChild(div);
+  });
+
+  function toggleDetalle(elemento) {
+    const detalle = elemento.querySelector('.detalle');
+    detalle.style.display = detalle.style.display === 'block' ? 'none' : 'block';
+  }
+
+  function agregarAlCarrito(event, juego, precio) {
+    event.stopPropagation();
+    carrito.push({ juego, precio });
+    total += precio;
+    actualizarCarrito();
+  }
+
+  function actualizarCarrito() {
+    const lista = document.getElementById("lista-carrito");
+    lista.innerHTML = '';
+    carrito.forEach(item => {
+      const li = document.createElement("li");
+      li.textContent = `${item.juego} - S/${item.precio}`;
+      lista.appendChild(li);
+    });
+    document.getElementById("total").textContent = total;
+  }
+
+  function enviarPedido() {
+    if (carrito.length === 0) {
+      alert("Tu carrito está vacío.");
+      return;
+    }
+    let mensaje = "Hola, quiero estos juegos:\n\n";
+    carrito.forEach(item => {
+      mensaje += `• ${item.juego} - S/${item.precio}\n`;
+    });
+    mensaje += `\nTotal: S/${total}`;
+    const enlaceWhatsApp = `https://wa.me/51958556903?text=${encodeURIComponent(mensaje)}`;
+    window.open(enlaceWhatsApp, '_blank');
+  }
+</script>
+
+</body>
+</html>
